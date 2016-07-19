@@ -192,9 +192,8 @@ SUBARCH := $(shell uname -m | sed -e s/i.86/i386/ -e s/sun4u/sparc64/ \
 # Default value for CROSS_COMPILE is not to prefix executables
 # Note: Some architectures assign CROSS_COMPILE in their arch/*/Makefile
 export KBUILD_BUILDHOST := $(SUBARCH)
-ARCH		?= arm
-#CROSS_COMPILE	?= /home/kernel/arm-2011.03/bin/arm-none-linux-gnueabi-
-CROSS_COMPILE	?= /home/kernel/android-ndk-r8e/toolchains/arm-linux-androideabi-4.7/prebuilt/linux-x86/bin/arm-linux-androideabi-
+ARCH		?= $(SUBARCH)
+CROSS_COMPILE	?= $(CONFIG_CROSS_COMPILE:"%"=%)
 
 # Architecture as present in compile.h
 UTS_MACHINE 	:= $(ARCH)
@@ -373,8 +372,7 @@ KBUILD_CPPFLAGS := -D__KERNEL__
 KBUILD_CFLAGS   := -Wundef -Wstrict-prototypes -Wno-trigraphs -Wno-format-security \
 		   -Werror-implicit-function-declaration \
 		   -fno-strict-aliasing -fno-common -fno-delete-null-pointer-checks -fno-pic \
-		   -march=armv7-a -mfloat-abi=softfp -mtune=cortex-a9 -mfpu=neon -march=armv7-a \
-		   --sysroot=/home/kernel/android-ndk-r8e/platforms/android-14/arch-arm \
+		   -march=armv7-a -mfloat-abi=softfp -mcpu=cortex-a9 -mtune=cortex-a9 -mfpu=neon -march=armv7-a \
 		   -pipe
 
 		   # -funswitch-loops -fpredictive-commoning \
